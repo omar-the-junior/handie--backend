@@ -1,0 +1,213 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  email      String   @unique
+  password   String
+  name       String?
+  phone      String?  // Added phone number field
+  userType   UserType
+  products   Product[]
+  orders     Order[]
+  cart       Cart?
+  wishlist   Wishlist?
+  reviews    ProductReview[]
+  contacts   Contact[]
+  checkouts  Checkout[]
+  addresses  Address[]
+  sellerProfile SellerProfile? // Link to SellerProfile
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model SellerProfile {
+  id                 Int      @id @default(autoincrement())
+  userId             Int      @unique
+  user               User     @relation(fields: [userId], references: [id])
+  businessName       String?
+  businessDescription String
+  businessEmail      String
+  businessPhone      String
+  targetCategories   Category[]
+  image              String?  // Added image field
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  price       Float   
+  discount    Float?   // Discount percentage (e.g., 0.20 for 20% off)
+  discountFrom DateTime? // Discount start date
+  discountTo  DateTime? // Discount end date
+  stock       Int      // Number of items in stock
+  sellerId    Int
+  seller      User     @relation(fields: [sellerId], references: [id])
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id])
+  reviews     ProductReview[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  CartItem    CartItem[]
+  WishlistItem WishlistItem[]
+  Order       Order[]
+
+  ProductAttribute ProductAttribute[]
+  images      ProductImage[]
+}
+
+model ProductImage {
+  id        Int      @id @default(autoincrement())
+  path      String   // Path or identifier of the image
+  isPrimary Boolean  // Indicates if this is the primary image
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProductAttribute {
+  id        Int      @id @default(autoincrement())
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id])
+  key       String
+  values    AttributeValue[]
+}
+
+model AttributeValue {
+  id        Int      @id @default(autoincrement())
+  attributeId Int
+  attribute ProductAttribute @relation(fields: [attributeId], references: [id])
+  value     String
+}
+
+
+
+enum OrderStatus {
+  PENDING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+model Order {
+  id          Int         @id @default(autoincrement())
+  buyerId     Int
+  buyer       User        @relation(fields: [buyerId], references: [id])
+  productId   Int
+  product     Product     @relation(fields: [productId], references: [id])
+  quantity    Int
+  totalPrice  Float
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  status      OrderStatus @default(PENDING)
+  Checkout    Checkout[]
+}
+
+model Cart {
+  id        Int      @id @default(autoincrement())
+  userId    Int @unique
+  user      User     @relation(fields: [userId], references: [id])
+  items     CartItem[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CartItem {
+  id        Int      @id @default(autoincrement())
+  cartId    Int
+  cart      Cart     @relation(fields: [cartId], references: [id])
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id])
+  quantity  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Wishlist {
+  id        Int      @id @default(autoincrement())
+  userId    Int @unique
+  user      User     @relation(fields: [userId], references: [id])
+  items     WishlistItem[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model WishlistItem {
+  id        Int      @id @default(autoincrement())
+  wishlistId Int
+  wishlist  Wishlist @relation(fields: [wishlistId], references: [id])
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProductReview {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id])
+  rating    Int
+  comment   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  products  Product[]
+  SellerProfile SellerProfile[]
+}
+
+model Contact {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  subject   String
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model Checkout {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  orderId     Int
+  order       Order    @relation(fields: [orderId], references: [id])
+  addressId   Int
+  address     Address  @relation(fields: [addressId], references: [id])
+  paymentType PaymentType @default(CASH_ON_DELIVERY)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Address {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  governorate String
+  street      String
+  createdAt   DateTime @default(now())
+  Checkout    Checkout[]
+}
+
+enum PaymentType {
+  CASH_ON_DELIVERY
+}
+
+enum UserType {
+  BUYER
+  SELLER
+}
