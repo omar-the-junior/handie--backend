@@ -1,6 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
-import helmet from 'helmet';
+// import helmet from 'helmet';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 // import cors from 'cors';
@@ -16,9 +16,9 @@ import { TspecDocsMiddleware } from 'tspec';
 const app = express();
 
 app.use(morgan('dev'));
-app.use(helmet());
+// app.use(helmet());
 // app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
-app.use(helmet.xssFilter());
+// app.use(helmet.xssFilter());
 // app.use(
 //   helmet.contentSecurityPolicy({
 //     directives: {
