@@ -1,14 +1,38 @@
-import type { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction, RequestHandler } from 'express';
 import { ZodSchema, ZodError } from 'zod';
 
-const validate =
-  (schema: ZodSchema) => (req: Request, res: Response, next: NextFunction) => {
+export type ValidationErrorResponseBody = {
+  success: boolean;
+  errors: {
+    path: (string | number)[];
+    message: string;
+  }[];
+};
+
+const validate = <Params = unknown, ReqBody = unknown, ReqQuery = unknown>(
+  schema: ZodSchema,
+) => {
+  const middleware: RequestHandler<
+    Params,
+    ValidationErrorResponseBody,
+    ReqBody,
+    ReqQuery
+  > = (
+    req: Request<Params, ValidationErrorResponseBody, ReqBody, ReqQuery>,
+    res: Response<ValidationErrorResponseBody>,
+    next: NextFunction,
+  ) => {
     try {
-      schema.parse({
+      const parsedValues = schema.parse({
         body: req.body,
         query: req.query,
         params: req.params,
       });
+
+      req.body = parsedValues.body;
+      req.query = parsedValues.query;
+      req.params = parsedValues.params;
+
       next();
     } catch (error) {
       if (error instanceof ZodError) {
@@ -24,5 +48,8 @@ const validate =
       }
     }
   };
+
+  return middleware;
+};
 
 export default validate;

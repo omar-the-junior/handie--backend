@@ -10,6 +10,7 @@ import type { CustomJwtPayload } from '../utils/jwt.utils.js';
 import { InternalSeverError } from '../errors/index.js';
 
 import type { LoginReqType, SignupReqType } from '../schemas/userSchemas.js';
+import type { ValidationErrorResponseBody } from '../middleware/validation.middleware.js';
 
 // Define response types
 interface LoginResponse {
@@ -32,12 +33,12 @@ interface RefreshTokenResponse {
 // Define types for the request handlers
 type LoginHandler = RequestHandler<
   unknown,
-  LoginResponse,
+  LoginResponse | ValidationErrorResponseBody,
   LoginReqType['body']
 >;
 type SignupHandler = RequestHandler<
   unknown,
-  SignupResponse,
+  SignupResponse | ValidationErrorResponseBody,
   SignupReqType['body']
 >;
 type RefreshTokenHandler = RequestHandler<unknown, RefreshTokenResponse>;

@@ -5,10 +5,10 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
-import { auth } from './api/index.api.js';
+import { apiRouter, auth } from './api/index.api.js';
 
 import {
-  notFoundMiddleware,
+  // notFoundMiddleware,
   errorHandlerMiddleware,
 } from './middleware/index.middleware.js';
 import { TspecDocsMiddleware } from 'tspec';
@@ -30,11 +30,13 @@ app.use(
   }),
 );
 
+app.use(express.static('public'));
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true, limit: '30mb' }));
-// app.use('/api/', api);
+
+app.use('/api/', apiRouter);
 
 app.use('/auth/', auth);
 
@@ -53,7 +55,6 @@ app.use(
   }),
 );
 
-app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
 export default app;

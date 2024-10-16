@@ -1,19 +1,8 @@
 import type { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import type { CustomJwtPayload } from '../utils/jwt.utils.js';
 
-interface AuthenticatedRequest extends Request {
-  user?: {
-    userId: string;
-    userType: string;
-    email: string;
-  };
-}
-
-const authMiddleware = (
-  req: AuthenticatedRequest,
-  res: Response,
-  next: NextFunction,
-) => {
+const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
@@ -30,13 +19,13 @@ const authMiddleware = (
           throw new Error('JWT_SECRET is not defined');
         }
 
-        const decoded = jwt.verify(token, secret) as {
-          userId: string;
-          userType: string;
-          email: string;
-        };
+        const decoded = jwt.verify(token, secret) as CustomJwtPayload;
 
-        req.user = decoded;
+        req.user = {
+          userId: decoded.userId,
+          userType: decoded.userType,
+          email: decoded.email,
+        };
         next();
       } catch (error) {
         console.error(error); // Log the error for debugging
@@ -44,6 +33,18 @@ const authMiddleware = (
       }
     }
   }
+};
+
+export const authorizeRoles = (...roles: string[]) => {
+  return (req: Request, res: Response, next: NextFunction) => {
+    if (!req.user) {
+      res.status(401).json({ error: 'Unauthorized' });
+    } else if (!roles.includes(req.user.userType)) {
+      res.status(403).json({ error: 'Forbidden: Insufficient permissions' });
+    } else {
+      next();
+    }
+  };
 };
 
 export default authMiddleware;

@@ -11,7 +11,7 @@ model User {
   id         Int      @id @default(autoincrement())
   email      String   @unique
   password   String
-  name       String?
+  name       String
   phone      String?  // Added phone number field
   userType   UserType
   products   Product[]
@@ -44,9 +44,9 @@ model SellerProfile {
 model Product {
   id          Int      @id @default(autoincrement())
   title       String
-  description String?
+  description String
   price       Float   
-  discount    Float?   // Discount percentage (e.g., 0.20 for 20% off)
+  discount    Float    @default(1)   // Discount percentage (e.g., 0.20 for 20% off)
   discountFrom DateTime? // Discount start date
   discountTo  DateTime? // Discount end date
   stock       Int      // Number of items in stock
@@ -61,7 +61,7 @@ model Product {
   WishlistItem WishlistItem[]
   Order       Order[]
 
-  ProductAttribute ProductAttribute[]
+  Attributes ProductAttribute[]
   images      ProductImage[]
 }
 
@@ -72,7 +72,7 @@ model ProductImage {
   productId Int
   product   Product  @relation(fields: [productId], references: [id])
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 }
 
 model ProductAttribute {
@@ -89,8 +89,6 @@ model AttributeValue {
   attribute ProductAttribute @relation(fields: [attributeId], references: [id])
   value     String
 }
-
-
 
 enum OrderStatus {
   PENDING
@@ -111,6 +109,8 @@ model Order {
   updatedAt   DateTime    @updatedAt
   status      OrderStatus @default(PENDING)
   Checkout    Checkout[]
+  addressId   Int
+  address     Address     @relation(fields: [addressId], references: [id])
 }
 
 model Cart {
@@ -200,7 +200,9 @@ model Address {
   governorate String
   street      String
   createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
   Checkout    Checkout[]
+  Order       Order[]
 }
 
 enum PaymentType {

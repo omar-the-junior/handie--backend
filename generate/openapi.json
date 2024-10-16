@@ -8,7 +8,7 @@
   "paths": {
     "/auth/login": {
       "post": {
-        "operationId": "APISpec_post_/login",
+        "operationId": "AuthSpec_post_/login",
         "tags": [
           "auth"
         ],
@@ -44,7 +44,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/LoginResponse"
+                  "$ref": "#/components/schemas/ResBodyOf_LoginHandler_"
                 }
               }
             }
@@ -54,7 +54,7 @@
     },
     "/auth/signup": {
       "post": {
-        "operationId": "APISpec_post_/signup",
+        "operationId": "AuthSpec_post_/signup",
         "tags": [
           "auth"
         ],
@@ -98,7 +98,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SignupResponse"
+                  "$ref": "#/components/schemas/ResBodyOf_SignupHandler_"
                 }
               }
             }
@@ -108,7 +108,7 @@
     },
     "/auth/refresh-token": {
       "post": {
-        "operationId": "APISpec_post_/refresh-token",
+        "operationId": "AuthSpec_post_/refresh-token",
         "tags": [
           "auth"
         ],
@@ -131,6 +131,608 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/RefreshTokenResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cart/add": {
+      "post": {
+        "operationId": "CartSpec_post_/add",
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Add item to cart",
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "productId": {
+                    "type": "number"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "productId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__cartItem__id_number_productId_number_____"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.AuthenticationErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.NotFoundErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cart/remove": {
+      "post": {
+        "operationId": "CartSpec_post_/remove",
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Remove item from cart",
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cartItemId": {
+                    "type": "number"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "cartItemId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse_null_"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.AuthenticationErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.NotFoundErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cart/decrease": {
+      "post": {
+        "operationId": "CartSpec_post_/decrease",
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Decrease item quantity in cart",
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cartItemId": {
+                    "type": "number"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "cartItemId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__cartItem__id_number_productId_number_quantity_number_____null_"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.AuthenticationErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.NotFoundErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cart/increase": {
+      "post": {
+        "operationId": "CartSpec_post_/increase",
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Increase item quantity in cart",
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "cartItemId": {
+                    "type": "number"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "cartItemId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__cartItem__id_number_productId_number_quantity_number_____"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.InsufficientStockErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.AuthenticationErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.NotFoundErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cart/items": {
+      "get": {
+        "operationId": "CartSpec_get_/items",
+        "tags": [
+          "Cart"
+        ],
+        "summary": "Get cart items",
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__cartItems__id_number_quantity_number_product__id_number_title_string_price_number_discount__number_undefined_image__string_undefined_attributes__id_number_values__id_number_value_string_________________"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.NotFoundErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.NotFoundErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/products/": {
+      "get": {
+        "operationId": "ProductSpec_get_/",
+        "tags": [
+          "Products"
+        ],
+        "summary": "Get Products",
+        "description": "Retrieve a list of all products",
+        "parameters": [
+          {
+            "name": "title",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sellerId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "minPrice",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "maxPrice",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "categories",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                },
+                {
+                  "type": "number"
+                }
+              ]
+            }
+          },
+          {
+            "name": "priceSortOrder",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResBodyOf_GetProductsHandler_"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/products/{id}": {
+      "get": {
+        "operationId": "ProductSpec_get_/{id}",
+        "tags": [
+          "Products"
+        ],
+        "summary": "Get Product by ID",
+        "description": "Retrieve a product by its ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResBodyOf_GetProductByIdHandler_"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/user/profile": {
+      "get": {
+        "operationId": "UserSpec_get_/profile",
+        "tags": [
+          "User"
+        ],
+        "summary": "Get user profile",
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__user__id_number_email_string_name_string_phone_string_null_userType_string_____"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.AuthenticationErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.NotFoundErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "UserSpec_put_/profile",
+        "tags": [
+          "User"
+        ],
+        "summary": "Update user profile",
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__user__id_number_email_string_name_string_phone_string_null_userType_string______1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "path": {
+                            "type": "array",
+                            "items": {
+                              "oneOf": [
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "number"
+                                }
+                              ]
+                            }
+                          },
+                          "message": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false,
+                        "required": [
+                          "message",
+                          "path"
+                        ]
+                      }
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "errors",
+                    "success"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.AuthenticationErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.NotFoundErrorResponse"
                 }
               }
             }
@@ -182,6 +784,55 @@
           ]
         }
       },
+      "ResBodyOf_LoginHandler_": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "success": {
+                "type": "boolean"
+              },
+              "errors": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "array",
+                      "items": {
+                        "oneOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "number"
+                          }
+                        ]
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "message",
+                    "path"
+                  ]
+                }
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "errors",
+              "success"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/LoginResponse"
+          }
+        ]
+      },
       "LoginResponse": {
         "type": "object",
         "properties": {
@@ -228,6 +879,55 @@
           "repeatPassword"
         ]
       },
+      "ResBodyOf_SignupHandler_": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "success": {
+                "type": "boolean"
+              },
+              "errors": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "array",
+                      "items": {
+                        "oneOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "number"
+                          }
+                        ]
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "message",
+                    "path"
+                  ]
+                }
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "errors",
+              "success"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/SignupResponse"
+          }
+        ]
+      },
       "SignupResponse": {
         "type": "object",
         "properties": {
@@ -263,6 +963,952 @@
         "additionalProperties": false
       },
       "RefreshTokenHandler": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "_productId_number__": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "productId"
+        ]
+      },
+      "import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__cartItem__id_number_productId_number_____": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success"
+            ]
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "cartItem": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "productId": {
+                    "type": "number"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "productId"
+                ]
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "cartItem"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "data",
+          "status"
+        ]
+      },
+      "import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.AuthenticationErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "error"
+            ]
+          },
+          "error": {
+            "type": "string"
+          },
+          "errorCode": {
+            "type": "string",
+            "enum": [
+              "AUTHENTICATION_ERROR"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "error",
+          "errorCode",
+          "status"
+        ]
+      },
+      "import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.NotFoundErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "error"
+            ]
+          },
+          "error": {
+            "type": "string"
+          },
+          "errorCode": {
+            "type": "string",
+            "enum": [
+              "NOT_FOUND_ERROR"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "error",
+          "errorCode",
+          "status"
+        ]
+      },
+      "AddToCartHandler": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "_cartItemId_number__": {
+        "type": "object",
+        "properties": {
+          "cartItemId": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "cartItemId"
+        ]
+      },
+      "import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse_null_": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success"
+            ]
+          },
+          "data": {
+            "nullable": true
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "data",
+          "status"
+        ]
+      },
+      "RemoveFromCartHandler": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__cartItem__id_number_productId_number_quantity_number_____null_": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success"
+            ]
+          },
+          "data": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "cartItem": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "productId": {
+                        "type": "number"
+                      },
+                      "quantity": {
+                        "type": "number"
+                      }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                      "id",
+                      "productId",
+                      "quantity"
+                    ]
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "cartItem"
+                ]
+              }
+            ],
+            "nullable": true
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "data",
+          "status"
+        ]
+      },
+      "DecreaseCartItemQuantityHandler": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__cartItem__id_number_productId_number_quantity_number_____": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success"
+            ]
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "cartItem": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "productId": {
+                    "type": "number"
+                  },
+                  "quantity": {
+                    "type": "number"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "productId",
+                  "quantity"
+                ]
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "cartItem"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "data",
+          "status"
+        ]
+      },
+      "import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.InsufficientStockErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "error"
+            ]
+          },
+          "error": {
+            "type": "string"
+          },
+          "errorCode": {
+            "type": "string",
+            "enum": [
+              "INSUFFICIENT_STOCK_ERROR"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "error",
+          "errorCode",
+          "status"
+        ]
+      },
+      "IncreaseCartItemQuantityHandler": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__cartItems__id_number_quantity_number_product__id_number_title_string_price_number_discount__number_undefined_image__string_undefined_attributes__id_number_values__id_number_value_string_________________": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success"
+            ]
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "cartItems": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "quantity": {
+                      "type": "number"
+                    },
+                    "product": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "price": {
+                          "type": "number"
+                        },
+                        "discount": {
+                          "type": "number"
+                        },
+                        "image": {
+                          "type": "string"
+                        },
+                        "attributes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "values": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "number"
+                                    },
+                                    "value": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "additionalProperties": false,
+                                  "required": [
+                                    "id",
+                                    "value"
+                                  ]
+                                }
+                              }
+                            },
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "values"
+                            ]
+                          }
+                        }
+                      },
+                      "additionalProperties": false,
+                      "required": [
+                        "attributes",
+                        "id",
+                        "price",
+                        "title"
+                      ]
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "id",
+                    "product",
+                    "quantity"
+                  ]
+                }
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "cartItems"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "data",
+          "status"
+        ]
+      },
+      "GetCartItemsHandler": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "_title__string_undefined_sellerId__number_undefined_minPrice__number_undefined_maxPrice__number_undefined_categories__number_number___undefined_priceSortOrder___asc___desc__undefined__": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "sellerId": {
+            "type": "number"
+          },
+          "minPrice": {
+            "type": "number"
+          },
+          "maxPrice": {
+            "type": "number"
+          },
+          "categories": {
+            "anyOf": [
+              {
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              {
+                "type": "number"
+              }
+            ]
+          },
+          "priceSortOrder": {
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ResBodyOf_GetProductsHandler_": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "success": {
+                "type": "boolean"
+              },
+              "errors": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "array",
+                      "items": {
+                        "oneOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "number"
+                          }
+                        ]
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "message",
+                    "path"
+                  ]
+                }
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "errors",
+              "success"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.AuthenticationErrorResponse"
+          },
+          {
+            "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.AuthorizationErrorResponse"
+          },
+          {
+            "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.NotFoundErrorResponse"
+          },
+          {
+            "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.InsufficientStockErrorResponse"
+          },
+          {
+            "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__products__id_number_title_string_price_number_discount__number_undefined_image__string_undefined_stock_number_categoryId_number_sellerId_number_______"
+          }
+        ]
+      },
+      "import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.AuthorizationErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "error"
+            ]
+          },
+          "error": {
+            "type": "string"
+          },
+          "errorCode": {
+            "type": "string",
+            "enum": [
+              "AUTHORIZATION_ERROR"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "error",
+          "errorCode",
+          "status"
+        ]
+      },
+      "import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__products__id_number_title_string_price_number_discount__number_undefined_image__string_undefined_stock_number_categoryId_number_sellerId_number_______": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success"
+            ]
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "products": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "price": {
+                      "type": "number"
+                    },
+                    "discount": {
+                      "type": "number"
+                    },
+                    "image": {
+                      "type": "string"
+                    },
+                    "stock": {
+                      "type": "number"
+                    },
+                    "categoryId": {
+                      "type": "number"
+                    },
+                    "sellerId": {
+                      "type": "number"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "categoryId",
+                    "id",
+                    "price",
+                    "sellerId",
+                    "stock",
+                    "title"
+                  ]
+                }
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "products"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "data",
+          "status"
+        ]
+      },
+      "GetProductsHandler": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "_id_number__": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "id"
+        ]
+      },
+      "ResBodyOf_GetProductByIdHandler_": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "success": {
+                "type": "boolean"
+              },
+              "errors": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "array",
+                      "items": {
+                        "oneOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "number"
+                          }
+                        ]
+                      }
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "message",
+                    "path"
+                  ]
+                }
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "errors",
+              "success"
+            ]
+          },
+          {
+            "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.AuthenticationErrorResponse"
+          },
+          {
+            "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.AuthorizationErrorResponse"
+          },
+          {
+            "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.NotFoundErrorResponse"
+          },
+          {
+            "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.InsufficientStockErrorResponse"
+          },
+          {
+            "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse_GetProductByIdResponseBody_"
+          }
+        ]
+      },
+      "import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse_GetProductByIdResponseBody_": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success"
+            ]
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetProductByIdResponseBody"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "data",
+          "status"
+        ]
+      },
+      "GetProductByIdResponseBody": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "discount": {
+            "type": "number"
+          },
+          "discountFrom": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              }
+            ],
+            "nullable": true
+          },
+          "discountTo": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              }
+            ],
+            "nullable": true
+          },
+          "stock": {
+            "type": "number"
+          },
+          "sellerId": {
+            "type": "number"
+          },
+          "categoryId": {
+            "type": "number"
+          },
+          "Attributes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string"
+                },
+                "values": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                      "value"
+                    ]
+                  }
+                }
+              },
+              "additionalProperties": false,
+              "required": [
+                "key",
+                "values"
+              ]
+            }
+          },
+          "primaryImage": {
+            "type": "string"
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "Attributes",
+          "categoryId",
+          "description",
+          "discountFrom",
+          "discountTo",
+          "id",
+          "images",
+          "price",
+          "sellerId",
+          "stock",
+          "title"
+        ]
+      },
+      "GetProductByIdHandler": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__user__id_number_email_string_name_string_phone_string_null_userType_string_____": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success"
+            ]
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "user": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "userType": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "email",
+                  "id",
+                  "name",
+                  "phone",
+                  "userType"
+                ]
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "user"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "data",
+          "status"
+        ]
+      },
+      "GetUserProfileHandler": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "_name__string_undefined_email__string_undefined_phone__string_undefined__": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__user__id_number_email_string_name_string_phone_string_null_userType_string______1": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success"
+            ]
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "user": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "userType": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "email",
+                  "id",
+                  "name",
+                  "phone",
+                  "userType"
+                ]
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "user"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "data",
+          "status"
+        ]
+      },
+      "UpdateUserProfileHandler": {
         "type": "object",
         "additionalProperties": false
       }

@@ -7,7 +7,7 @@ const router = express.Router();
 
 import { type Tspec } from 'tspec';
 
-export type APISpec = Tspec.DefineApiSpec<{
+export type AuthSpec = Tspec.DefineApiSpec<{
   basePath: '/auth';
   tags: ['auth'];
   paths: {
@@ -30,7 +30,6 @@ export type APISpec = Tspec.DefineApiSpec<{
         summary: 'Refresh Token';
         description: 'Refresh the access token';
         handler: typeof refreshToken;
-
         cookie: {
           refreshToken?: string;
         };

@@ -1,5 +1,5 @@
 import { Prisma } from '@prisma/client';
-import type { Request, Response } from 'express';
+import type { NextFunction, Request, Response } from 'express';
 import CustomAPIError from '../errors/custom.error.js';
 
 interface ErrorWithStatusCode extends Error {
@@ -10,7 +10,13 @@ interface ErrorWithStatusCode extends Error {
   keyValue?: { [key: string]: string };
 }
 
-const errorHandlerMiddleware = (err: unknown, req: Request, res: Response) => {
+const errorHandlerMiddleware = (
+  err: unknown,
+  req: Request,
+  res: Response,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  next: NextFunction,
+) => {
   const defaultError = {
     statusCode: 500,
     msg: 'Something went wrong, try again later',
