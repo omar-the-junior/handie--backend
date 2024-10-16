@@ -3,7 +3,7 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import cors from 'cors';
+// import cors from 'cors';
 
 import { apiRouter, auth } from './api/index.api.js';
 
