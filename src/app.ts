@@ -17,7 +17,7 @@ const app = express();
 
 app.use(morgan('dev'));
 app.use(helmet());
-app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
+// app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 app.use(helmet.xssFilter());
 // app.use(
 //   helmet.contentSecurityPolicy({
@@ -31,7 +31,7 @@ app.use(helmet.xssFilter());
 // );
 
 app.use(express.static('public'));
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true, limit: '30mb' }));
