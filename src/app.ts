@@ -1,9 +1,9 @@
 import express from 'express';
 import morgan from 'morgan';
-// import helmet from 'helmet';
+import helmet from 'helmet';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-// import cors from 'cors';
+import cors from 'cors';
 
 import { apiRouter, auth } from './api/index.api.js';
 
@@ -16,22 +16,26 @@ import { TspecDocsMiddleware } from 'tspec';
 const app = express();
 
 app.use(morgan('dev'));
-// app.use(helmet());
-// app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
-// app.use(helmet.xssFilter());
-// app.use(
-//   helmet.contentSecurityPolicy({
-//     directives: {
-//       defaultSrc: ["'self'"],
-//       scriptSrc: ["'self'", "'trusted-cdn.com'"],
-//       objectSrc: ["'none'"],
-//       upgradeInsecureRequests: [],
-//     },
-//   }),
-// );
+app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
+app.use(helmet.xssFilter());
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'trusted-cdn.com'"],
+      objectSrc: ["'none'"],
+      upgradeInsecureRequests: [],
+    },
+  }),
+);
 
 app.use(express.static('public'));
-// app.use(cors());
+app.use(
+  cors({
+    origin: 'http://localhost:5173',
+  }),
+);
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true, limit: '30mb' }));
