@@ -13,11 +13,18 @@ import type { LoginReqType, SignupReqType } from '../schemas/userSchemas.js';
 import type { ValidationErrorResponseBody } from '../middleware/validation.middleware.js';
 
 // Define response types
-interface LoginResponse {
-  success: boolean;
-  accessToken?: string;
-  error?: string;
-}
+export type LoginResponse =
+  | {
+      success: true;
+      accessToken: string;
+      id: number;
+      email: string;
+      name: string;
+    }
+  | {
+      success: false;
+      error?: string;
+    };
 
 interface SignupResponse {
   success: boolean;
@@ -78,7 +85,13 @@ export const login: LoginHandler = async (req, res) => {
         });
 
         // Respond with the access token
-        res.json({ success: true, accessToken });
+        res.json({
+          id: user.id,
+          success: true,
+          accessToken,
+          email: user.email,
+          name: user.name,
+        });
       }
     }
   } catch (error) {

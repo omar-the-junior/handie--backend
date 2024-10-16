@@ -44,7 +44,85 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ResBodyOf_LoginHandler_"
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ]
+                    },
+                    "accessToken": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "number"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "accessToken",
+                    "email",
+                    "id",
+                    "name",
+                    "success"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    },
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "success"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        false
+                      ]
+                    },
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "success"
+                  ]
                 }
               }
             }
@@ -783,73 +861,6 @@
             }
           ]
         }
-      },
-      "ResBodyOf_LoginHandler_": {
-        "anyOf": [
-          {
-            "type": "object",
-            "properties": {
-              "success": {
-                "type": "boolean"
-              },
-              "errors": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "path": {
-                      "type": "array",
-                      "items": {
-                        "oneOf": [
-                          {
-                            "type": "string"
-                          },
-                          {
-                            "type": "number"
-                          }
-                        ]
-                      }
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  },
-                  "additionalProperties": false,
-                  "required": [
-                    "message",
-                    "path"
-                  ]
-                }
-              }
-            },
-            "additionalProperties": false,
-            "required": [
-              "errors",
-              "success"
-            ]
-          },
-          {
-            "$ref": "#/components/schemas/LoginResponse"
-          }
-        ]
-      },
-      "LoginResponse": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean"
-          },
-          "accessToken": {
-            "type": "string"
-          },
-          "error": {
-            "type": "string"
-          }
-        },
-        "additionalProperties": false,
-        "required": [
-          "success"
-        ]
       },
       "LoginHandler": {
         "type": "object",

@@ -1,7 +1,12 @@
 import express from 'express';
 import validate from '../middleware/validation.middleware.js';
 import { loginSchema, signupSchema } from '../schemas/userSchemas.js';
-import { login, refreshToken, signup } from '../controllers/auth.controller.js';
+import {
+  login,
+  refreshToken,
+  signup,
+  type LoginResponse,
+} from '../controllers/auth.controller.js';
 
 const router = express.Router();
 
@@ -16,6 +21,11 @@ export type AuthSpec = Tspec.DefineApiSpec<{
         summary: 'Login';
         description: 'Login to the application';
         handler: typeof login;
+        responses: {
+          200: Extract<LoginResponse, { success: true }>;
+          401: Extract<LoginResponse, { success: false }>;
+          500: Extract<LoginResponse, { success: false }>;
+        };
       };
     };
     '/signup': {
