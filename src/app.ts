@@ -19,16 +19,16 @@ app.use(morgan('dev'));
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 app.use(helmet.xssFilter());
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'trusted-cdn.com'"],
-      objectSrc: ["'none'"],
-      upgradeInsecureRequests: [],
-    },
-  }),
-);
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       defaultSrc: ["'self'"],
+//       scriptSrc: ["'self'", "'trusted-cdn.com'"],
+//       objectSrc: ["'none'"],
+//       upgradeInsecureRequests: [],
+//     },
+//   }),
+// );
 
 app.use(express.static('public'));
 app.use(cors());
