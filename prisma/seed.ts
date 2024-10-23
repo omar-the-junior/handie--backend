@@ -43,7 +43,7 @@ async function main() {
       businessDescription: 'Description for Business One',
       businessEmail: 'business1@example.com',
       businessPhone: '123-456-7890',
-      image: '/images/sellerImg1.png',
+      image: '/images/sellerImg1.jpg',
       createdAt: new Date(),
       updatedAt: new Date(),
     },
@@ -82,8 +82,8 @@ async function main() {
       sellerId: sellerProfile1.id,
       categoryId: categoryRecords[0].id, // Electronics
       images: [
-        { path: '/images/image2.png', isPrimary: true },
-        { path: '/images/image3.png', isPrimary: false },
+        { path: '/images/image2.jpg', isPrimary: true },
+        { path: '/images/image3.jpg', isPrimary: false },
       ],
     },
     {
@@ -95,8 +95,8 @@ async function main() {
       sellerId: sellerProfile1.id,
       categoryId: categoryRecords[0].id, // Electronics
       images: [
-        { path: '/images/image4.png', isPrimary: true },
-        { path: '/images/image5.png', isPrimary: false },
+        { path: '/images/image4.jpg', isPrimary: true },
+        { path: '/images/image5.jpg', isPrimary: false },
       ],
     },
     {
@@ -107,7 +107,7 @@ async function main() {
       stock: 100,
       sellerId: sellerProfile1.id,
       categoryId: categoryRecords[1].id, // Books
-      images: [{ path: '/images/image6.png', isPrimary: true }],
+      images: [{ path: '/images/image6.jpg', isPrimary: true }],
     },
     {
       title: 'Necklace',
@@ -117,7 +117,7 @@ async function main() {
       stock: 20,
       sellerId: sellerProfile1.id,
       categoryId: categoryRecords[2].id, // Jewelry & Accessories
-      images: [{ path: '/images/image7.png', isPrimary: true }],
+      images: [{ path: '/images/image7.jpg', isPrimary: true }],
     },
     {
       title: 'T-shirt',
@@ -127,7 +127,7 @@ async function main() {
       stock: 100,
       sellerId: sellerProfile1.id,
       categoryId: categoryRecords[3].id, // Clothing & Apparel
-      images: [{ path: '/images/image8.png', isPrimary: true }],
+      images: [{ path: '/images/image8.jpg', isPrimary: true }],
     },
     {
       title: 'Wall Art',
@@ -137,7 +137,7 @@ async function main() {
       stock: 50,
       sellerId: sellerProfile1.id,
       categoryId: categoryRecords[4].id, // Home Décor
-      images: [{ path: '/images/image9.png', isPrimary: true }],
+      images: [{ path: '/images/image9.jpg', isPrimary: true }],
     },
     {
       title: 'Painting',
@@ -147,7 +147,7 @@ async function main() {
       stock: 10,
       sellerId: sellerProfile1.id,
       categoryId: categoryRecords[5].id, // Art & Prints
-      images: [{ path: '/images/image10.png', isPrimary: true }],
+      images: [{ path: '/images/image10.jpg', isPrimary: true }],
     },
     {
       title: 'Toy Car',
@@ -157,7 +157,7 @@ async function main() {
       stock: 200,
       sellerId: sellerProfile1.id,
       categoryId: categoryRecords[6].id, // Toys & Baby Items
-      images: [{ path: '/images/image11.png', isPrimary: true }],
+      images: [{ path: '/images/image11.jpg', isPrimary: true }],
     },
     {
       title: 'Face Cream',
@@ -167,7 +167,7 @@ async function main() {
       stock: 100,
       sellerId: sellerProfile1.id,
       categoryId: categoryRecords[7].id, // Wellness & Beauty
-      images: [{ path: '/images/image12.png', isPrimary: true }],
+      images: [{ path: '/images/image12.jpg', isPrimary: true }],
     },
   ];
 
