@@ -1,8 +1,9 @@
+import type { User } from '@prisma/client';
 import { signJWT, verifyJWT } from './jwt.utils.js';
 
 export type TokenPayload = {
-  userId: number;
-  userType: string;
+  id: number;
+  userType: User['userType'];
   email: string;
 };
 

@@ -11,6 +11,7 @@ import { InternalSeverError } from '../errors/index.js';
 
 import type { LoginReqType, SignupReqType } from '../schemas/userSchemas.js';
 import type { ValidationErrorResponseBody } from '../middleware/validation.middleware.js';
+import type { User } from '@prisma/client';
 
 // Define response types
 export type LoginResponse =
@@ -33,6 +34,11 @@ interface SignupResponse {
 }
 
 interface RefreshTokenResponse {
+  user?: {
+    id: number;
+    email: string;
+    userType: User['userType'];
+  };
   accessToken?: string;
   error?: string;
 }
@@ -52,6 +58,7 @@ type RefreshTokenHandler = RequestHandler<unknown, RefreshTokenResponse>;
 
 export const login: LoginHandler = async (req, res) => {
   const { email, password } = req.body;
+
   try {
     // Find the user by email
     const user = await prisma.user.findUnique({ where: { email } });
@@ -61,24 +68,27 @@ export const login: LoginHandler = async (req, res) => {
     } else {
       // Compare the provided password with the stored hashed password
       const isPasswordValid = await bcrypt.compare(password, user.password);
+
       if (!isPasswordValid) {
         res.status(401).json({ success: false, error: 'Invalid credentials' });
       } else {
         // Generate access and refresh tokens
         const accessToken = generateAccessToken({
-          userId: user.id,
+          id: user.id,
           userType: user.userType,
           email: user.email,
         });
 
         const refreshToken = generateRefreshToken({
-          userId: user.id,
+          id: user.id,
           userType: user.userType,
           email: user.email,
         });
 
         // Set the refresh token as an HTTP-only cookie
         res.cookie('refreshToken', refreshToken, {
+          partitioned: true,
+          sameSite: 'none',
           httpOnly: true,
           secure: true,
           maxAge: 1000 * 60 * 60 * 24 * 14, // 14 days
@@ -127,19 +137,21 @@ export const signup: SignupHandler = async (req, res) => {
 
         // Generate access and refresh tokens
         const accessToken = generateAccessToken({
-          userId: user.id,
+          id: user.id,
           userType: user.userType,
           email: user.email,
         });
 
         const refreshToken = generateRefreshToken({
-          userId: user.id,
+          id: user.id,
           userType: user.userType,
           email: user.email,
         });
 
         // Set the refresh token as an HTTP-only cookie
         res.cookie('refreshToken', refreshToken, {
+          partitioned: true,
+          sameSite: 'none',
           httpOnly: true,
           secure: true,
           maxAge: 1000 * 60 * 60 * 24 * 14, // 14 days
@@ -162,6 +174,7 @@ export const refreshToken: RefreshTokenHandler = async (req, res) => {
     res.status(401).json({ error: 'Refresh token missing' });
   } else {
     const { payload, expired } = verifyRefreshToken(token);
+    console.log(payload);
 
     if (!payload || expired) {
       res.status(401).json({ error: 'Invalid or expired refresh token' });
@@ -173,7 +186,7 @@ export const refreshToken: RefreshTokenHandler = async (req, res) => {
       const userPayload = payload as CustomJwtPayload;
 
       const user = {
-        userId: userPayload.userId,
+        id: userPayload.id,
         email: userPayload.email,
         userType: userPayload.userType,
       };
@@ -182,12 +195,28 @@ export const refreshToken: RefreshTokenHandler = async (req, res) => {
       const newRefreshToken = generateRefreshToken(user);
 
       res.cookie('refreshToken', newRefreshToken, {
+        partitioned: true,
+        sameSite: 'none',
         httpOnly: true,
         secure: true,
         maxAge: 1000 * 60 * 60 * 24 * 14, // 14 days
       });
 
-      res.json({ accessToken });
+      res.json({ accessToken, user });
     }
   }
+};
+
+export type LogoutHandler = RequestHandler<
+  unknown,
+  {
+    success: true;
+    message: 'Logged out successfully';
+  }
+>;
+
+export const logout: LogoutHandler = async (req, res) => {
+  res.clearCookie('refreshToken');
+
+  res.json({ success: true, message: 'Logged out successfully' });
 };

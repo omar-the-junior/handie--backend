@@ -1,4 +1,8 @@
-import express from 'express';
+import express, {
+  type NextFunction,
+  type Request,
+  type Response,
+} from 'express';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import bodyParser from 'body-parser';
@@ -31,8 +35,11 @@ app.use(
 );
 
 app.use(express.static('public'));
+
 app.use(
   cors({
+    origin: true,
+    optionsSuccessStatus: 200,
     credentials: true,
   }),
 );
@@ -57,6 +64,21 @@ app.use(
       },
     },
   }),
+);
+
+app.use(
+  (
+    err: { message: string },
+    _req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    if (err instanceof Error && err.message === 'Not allowed by CORS') {
+      res.status(403).json({ message: 'CORS error: Not allowed by CORS' });
+    } else {
+      next(err);
+    }
+  },
 );
 
 app.use(errorHandlerMiddleware);

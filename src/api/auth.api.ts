@@ -3,6 +3,7 @@ import validate from '../middleware/validation.middleware.js';
 import { loginSchema, signupSchema } from '../schemas/userSchemas.js';
 import {
   login,
+  logout,
   refreshToken,
   signup,
   type LoginResponse,
@@ -45,6 +46,16 @@ export type AuthSpec = Tspec.DefineApiSpec<{
         };
       };
     };
+    '/logout': {
+      post: {
+        summary: 'Logout';
+        description: 'Logout from the application';
+        handler: typeof logout;
+        responses: {
+          200: { success: true; message: 'Logged out successfully' };
+        };
+      };
+    };
   };
 }>;
 
@@ -56,4 +67,6 @@ router.post('/signup', validate(signupSchema), signup);
 
 // refresh token route
 router.post('/refresh-token', refreshToken);
+
+router.post('/logout', logout);
 export default router;

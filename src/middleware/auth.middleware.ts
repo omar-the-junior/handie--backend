@@ -22,7 +22,7 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
         const decoded = jwt.verify(token, secret) as CustomJwtPayload;
 
         req.user = {
-          userId: decoded.userId,
+          userId: decoded.id,
           userType: decoded.userType,
           email: decoded.email,
         };
