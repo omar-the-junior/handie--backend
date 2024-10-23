@@ -216,17 +216,13 @@ export type LogoutHandler = RequestHandler<
 >;
 
 export const logout: LogoutHandler = async (req, res) => {
-  console.log('before: ', req.cookies.refreshToken);
-  const value = res.clearCookie('refreshToken', {
+  res.clearCookie('refreshToken', {
     partitioned: true,
     sameSite: 'none',
     httpOnly: true,
     secure: true,
     maxAge: 1000 * 60 * 60 * 24 * 14, // 14 days
   });
-
-  console.log('value: ', value);
-  console.log('before: ', req.cookies.refreshToken);
 
   res.json({ success: true, message: 'Logged out successfully' });
 };
