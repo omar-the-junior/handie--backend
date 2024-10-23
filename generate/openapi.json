@@ -1553,7 +1553,7 @@
             "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.InsufficientStockErrorResponse"
           },
           {
-            "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__products__id_number_title_string_price_number_discount__number_undefined_image__string_undefined_stock_number_categoryId_number_sellerId_number_______"
+            "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__products_product_____"
           }
         ]
       },
@@ -1586,7 +1586,7 @@
           "status"
         ]
       },
-      "import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__products__id_number_title_string_price_number_discount__number_undefined_image__string_undefined_stock_number_categoryId_number_sellerId_number_______": {
+      "import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__products_product_____": {
         "type": "object",
         "properties": {
           "status": {
@@ -1616,24 +1616,62 @@
                       "type": "number"
                     },
                     "image": {
-                      "type": "string"
+                      "type": "string",
+                      "nullable": true
                     },
                     "stock": {
                       "type": "number"
                     },
-                    "categoryId": {
-                      "type": "number"
+                    "category": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "name": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": false,
+                      "required": [
+                        "id",
+                        "name"
+                      ]
                     },
-                    "sellerId": {
-                      "type": "number"
+                    "seller": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "image": {
+                          "type": "string",
+                          "nullable": true
+                        }
+                      },
+                      "additionalProperties": false,
+                      "required": [
+                        "id",
+                        "image",
+                        "name"
+                      ]
+                    },
+                    "rating": {
+                      "type": "number",
+                      "nullable": true
                     }
                   },
                   "additionalProperties": false,
                   "required": [
-                    "categoryId",
+                    "category",
                     "id",
+                    "image",
                     "price",
-                    "sellerId",
+                    "rating",
+                    "seller",
                     "stock",
                     "title"
                   ]

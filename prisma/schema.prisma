@@ -14,7 +14,6 @@ model User {
   name       String
   phone      String?  // Added phone number field
   userType   UserType
-  products   Product[]
   orders     Order[]
   cart       Cart?
   wishlist   Wishlist?
@@ -31,7 +30,7 @@ model SellerProfile {
   id                 Int      @id @default(autoincrement())
   userId             Int      @unique
   user               User     @relation(fields: [userId], references: [id])
-  businessName       String?
+  businessName       String
   businessDescription String
   businessEmail      String
   businessPhone      String
@@ -39,6 +38,8 @@ model SellerProfile {
   image              String?  // Added image field
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
+
+  Product Product[]
 }
 
 model Product {
@@ -51,7 +52,7 @@ model Product {
   discountTo  DateTime? // Discount end date
   stock       Int      // Number of items in stock
   sellerId    Int
-  seller      User     @relation(fields: [sellerId], references: [id])
+  seller      SellerProfile     @relation(fields: [sellerId], references: [id])
   categoryId  Int
   category    Category @relation(fields: [categoryId], references: [id])
   reviews     ProductReview[]
