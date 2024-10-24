@@ -1011,7 +1011,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__wishlistItems__id_number_product__id_number_title_string_price_number_discount__number_undefined_image__string_undefined_attributes__id_number_values__id_number_value_string_________________"
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__wishlistItems__id_number_product__id_number_title_string_price_number_discount__number_undefined_image_string_null_attributes__id_number_values__id_number_value_string_________________"
                 }
               }
             }
@@ -2289,7 +2289,7 @@
         "type": "object",
         "additionalProperties": false
       },
-      "import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__wishlistItems__id_number_product__id_number_title_string_price_number_discount__number_undefined_image__string_undefined_attributes__id_number_values__id_number_value_string_________________": {
+      "import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__wishlistItems__id_number_product__id_number_title_string_price_number_discount__number_undefined_image_string_null_attributes__id_number_values__id_number_value_string_________________": {
         "type": "object",
         "properties": {
           "status": {
@@ -2325,7 +2325,8 @@
                           "type": "number"
                         },
                         "image": {
-                          "type": "string"
+                          "type": "string",
+                          "nullable": true
                         },
                         "attributes": {
                           "type": "array",
@@ -2367,6 +2368,7 @@
                       "required": [
                         "attributes",
                         "id",
+                        "image",
                         "price",
                         "title"
                       ]

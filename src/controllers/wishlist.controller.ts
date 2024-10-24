@@ -10,6 +10,7 @@ import type {
   AddToWishlistInputType,
   WishlistItemInputType,
 } from '../schemas/wishlistSchemas.js';
+import { constructImageUrl } from '../utils/helpers.utils.js';
 
 // Define response types for different status codes
 export type AddToWishlistResponseBody = ApiResponse<{
@@ -193,7 +194,7 @@ export type GetWishlistItemsResponseBody = ApiResponse<{
       title: string;
       price: number;
       discount?: number;
-      image?: string;
+      image: string | null;
       attributes: {
         id: number;
         values: {
@@ -268,7 +269,7 @@ export const getWishlistItems: GetWishlistItemsHandler = async (
               title: string;
               price: number;
               discount?: number;
-              image?: string;
+              image: string | null;
               attributes: {
                 id: number;
                 values: {
@@ -289,7 +290,10 @@ export const getWishlistItems: GetWishlistItemsHandler = async (
                 title: item.product.title,
                 price: item.product.price,
                 discount: item.product.discount,
-                image: item.product.images[0]?.path,
+                image: constructImageUrl(
+                  req,
+                  item.product.images[0]?.path ?? '',
+                ),
                 attributes: item.product.Attributes.map((attr) => ({
                   id: attr.id,
                   values: attr.values.map((value) => ({
