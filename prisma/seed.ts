@@ -283,7 +283,42 @@ async function main() {
     ],
   });
 
-  console.log({ user2, sellerProfile1, productRecords, cart1 });
+  // Seed Wishlist for User1
+  const wishlist1 = await prisma.wishlist.upsert({
+    where: { userId: user1.id },
+    update: {},
+    create: {
+      userId: user1.id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+  });
+
+  // Seed Wishlist Items for User1
+  await prisma.wishlistItem.createMany({
+    data: [
+      {
+        wishlistId: wishlist1.id,
+        productId: productRecords[1].id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        wishlistId: wishlist1.id,
+        productId: productRecords[3].id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        wishlistId: wishlist1.id,
+        productId: productRecords[5].id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ],
+  });
+
+  console.log({ user2, sellerProfile1, productRecords, cart1, wishlist1 });
 }
 
 main()

@@ -60,7 +60,7 @@ model Product {
   updatedAt   DateTime @updatedAt
   CartItem    CartItem[]
   WishlistItem WishlistItem[]
-  Order       Order[]
+  Orders       Order[]
 
   Attributes ProductAttribute[]
   images      ProductImage[]
@@ -102,8 +102,7 @@ model Order {
   id          Int         @id @default(autoincrement())
   buyerId     Int
   buyer       User        @relation(fields: [buyerId], references: [id])
-  productId   Int
-  product     Product     @relation(fields: [productId], references: [id])
+  products     Product[]     
   quantity    Int
   totalPrice  Float
   createdAt   DateTime    @default(now())
@@ -200,6 +199,7 @@ model Address {
   user        User     @relation(fields: [userId], references: [id])
   governorate String
   street      String
+  city        String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   Checkout    Checkout[]
