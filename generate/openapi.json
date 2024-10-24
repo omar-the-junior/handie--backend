@@ -859,6 +859,185 @@
           }
         }
       }
+    },
+    "/api/wishlist/add": {
+      "post": {
+        "operationId": "WishlistSpec_post_/add",
+        "tags": [
+          "Wishlist"
+        ],
+        "summary": "Add item to wishlist",
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "productId": {
+                    "type": "number"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "productId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__wishlistItem__id_number_productId_number_____"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.AuthenticationErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.NotFoundErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wishlist/remove": {
+      "post": {
+        "operationId": "WishlistSpec_post_/remove",
+        "tags": [
+          "Wishlist"
+        ],
+        "summary": "Remove item from wishlist",
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "wishlistItemId": {
+                    "type": "number"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "wishlistItemId"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse_null_"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.AuthenticationErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.NotFoundErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wishlist/items": {
+      "get": {
+        "operationId": "WishlistSpec_get_/items",
+        "tags": [
+          "Wishlist"
+        ],
+        "summary": "Get wishlist items",
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__wishlistItems__id_number_product__id_number_title_string_price_number_discount__number_undefined_image__string_undefined_attributes__id_number_values__id_number_value_string_________________"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.NotFoundErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.NotFoundErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -2031,6 +2210,192 @@
         ]
       },
       "UpdateUserProfileHandler": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "_productId_number___1": {
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "productId"
+        ]
+      },
+      "import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__wishlistItem__id_number_productId_number_____": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success"
+            ]
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "wishlistItem": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "productId": {
+                    "type": "number"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "productId"
+                ]
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "wishlistItem"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "data",
+          "status"
+        ]
+      },
+      "AddToWishlistHandler": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "_wishlistItemId_number__": {
+        "type": "object",
+        "properties": {
+          "wishlistItemId": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "wishlistItemId"
+        ]
+      },
+      "RemoveFromWishlistHandler": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "import___home_omarjr_courses_depi_react_developer_track_final_project_handie_backend_src_api_types___assert___resolution-mode___import____.SuccessResponse__wishlistItems__id_number_product__id_number_title_string_price_number_discount__number_undefined_image__string_undefined_attributes__id_number_values__id_number_value_string_________________": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "success"
+            ]
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "wishlistItems": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "product": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "price": {
+                          "type": "number"
+                        },
+                        "discount": {
+                          "type": "number"
+                        },
+                        "image": {
+                          "type": "string"
+                        },
+                        "attributes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "values": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "number"
+                                    },
+                                    "value": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "additionalProperties": false,
+                                  "required": [
+                                    "id",
+                                    "value"
+                                  ]
+                                }
+                              }
+                            },
+                            "additionalProperties": false,
+                            "required": [
+                              "id",
+                              "values"
+                            ]
+                          }
+                        }
+                      },
+                      "additionalProperties": false,
+                      "required": [
+                        "attributes",
+                        "id",
+                        "price",
+                        "title"
+                      ]
+                    }
+                  },
+                  "additionalProperties": false,
+                  "required": [
+                    "id",
+                    "product"
+                  ]
+                }
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "wishlistItems"
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "data",
+          "status"
+        ]
+      },
+      "GetWishlistItemsHandler": {
         "type": "object",
         "additionalProperties": false
       }
